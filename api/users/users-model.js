@@ -11,22 +11,13 @@ function findBy(filter) {
     .join('roles', 'users.role_id', 'roles.role_id')
     .select('user_id', 'username', 'password', 'role_name')
     .where(filter)
-  /**
-    You will need to join two tables.
-    Resolves to an ARRAY with all users that match the filter condition.
-
-    [
-      {
-        "user_id": 1,
-        "username": "bob",
-        "password": "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq",
-        "role_name": "admin",
-      }
-    ]
-   */
 }
 
 function findById(user_id) {
+  return db('users')
+    .join('roles', 'users.role_id', 'roles.role_id')
+    .select('user_id', 'username', 'role_name')
+    .where('users.user_id', user_id).first()
   /**
     You will need to join two tables.
     Resolves to the user with the given user_id.
